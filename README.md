@@ -1,1 +1,2 @@
-Private developer version of scholology 2 premium
+# Scholology-2
+Open source version of scholology 2

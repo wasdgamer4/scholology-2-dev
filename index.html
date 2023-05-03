@@ -1,79 +1,100 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Home | Schoology</title>
-	<link id="favicon" rel="shortcut icon" type="image/png" href="favicon.ico"/>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        background-color: #f2f2f2;
-        font-family: Arial, sans-serif;
-      }
-      .container {
-        width: 400px;
-        margin: 0 auto;
-        margin-top: 100px;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      }
-      h1 {
-        text-align: center;
-        margin-bottom: 20px;
-      }
-      form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      label {
-        margin-bottom: 10px;
-        font-size: 18px;
-        font-weight: bold;
-      }
-      input[type="password"] {
-        padding: 10px;
-        font-size: 16px;
-        border: 2px solid #ccc;
-        border-radius: 5px;
-      }
-      button[type="submit"] {
-        margin-top: 20px;
-        padding: 10px 20px;
-        background-color: #4CAF50;
-        color: #fff;
-        font-size: 18px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-      button[type="submit"]:hover {
-        background-color: #3e8e41;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>Enter Passcode</h1>
-      <form>
-        <label for="passcode">Passcode:</label>
-        <input type="password" id="passcode" name="passcode" required>
-        <button type="submit">Submit</button>
-      </form>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Home | Schoology</title>
+  <link id="favicon" rel="shortcut icon" type="image/png" href="favicon.ico"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    }
+    h1 {
+      text-align: center;
+      margin-top: 0;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      margin-bottom: 10px;
+    }
+    input[type="password"] {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+      margin-bottom: 20px;
+    }
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+    .error {
+      color: red;
+      margin-bottom: 20px;
+    }
+    .forgot-password {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .forgot-password a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to my site</h1>
+    <h1>This is encrypted, so I recommend you use your LPS passcode.</h1>
+    <h1>Also, the 1st time you visit this website, it'll ask for you to log in. For that, just type in your LPS passcode and you're good to go. The passcode you type in the 1st time will be your permanent passcode.</h1>
+    <form id="passcode-form" onsubmit="validatePasscode(); return false;">
+      <label for="passcode">Please enter your passcode:</label>
+      <input type="password" id="passcode" name="passcode" required>
+      <input type="submit" value="Log in">
+      <div class="error" id="error-message"></div>
+    </form>
+    <div class="forgot-password">
+      <a href="#" onclick="forgotPasscode()">Forgot your passcode?</a>
     </div>
-    <script>
-      const form = document.querySelector('form');
-      form.addEventListener('submit', event => {
-        event.preventDefault();
-        const passcode = form.elements.passcode.value;
-        if (passcode ==='urlpspasscode') {
-          window.location.href = 'home.html';
-        } else {
-          alert('Incorrect passcode. Please try again.');
-        }
-      });
-    </script>
-  </body>
+  </div>
+  <script>
+    function validatePasscode() {
+      var passcode = document.getElementById("passcode").value;
+      if (localStorage.getItem("passcode") === null) {
+        localStorage.setItem("passcode", passcode);
+        window.location.href = "home.html";
+      } else if (localStorage.getItem("passcode") === passcode) {
+        window.location.href = "home.html";
+      } else {
+        document.getElementById("error-message").innerHTML = "Incorrect passcode. Please try again.";
+      }
+    }
+    function forgotPasscode() {
+      localStorage.removeItem("passcode");
+      document.getElementById("passcode-form").reset();
+      document.getElementById("error-message").innerHTML = "";
+    }
+  </script>
+</body>
 </html>
