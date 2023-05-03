@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home | Schoology</title>
+	<link id="favicon" rel="shortcut icon" type="image/png" href="favicon.ico"/>
+  <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body style="background-color:red">
+    <nav>
+      <a href="home.html" target="_self">Home</a>
+      <a href="groups.html" target="_self">Groups</a>
+      <a href="courses.html" target="_self">Courses</a>
+      <a href="resourcesonsite.html" target="_self">Resources</a>
+      <a href="grade_report.html" target="_self">Grade report</a>
+      <button onclick="openGame()"> Open in about:blank </button>
+    <script>
+      function openGame() {
+        var win = window.open()
+        var url = "https://scholology-2-1.wasdgamer4.repl.co"
+        var iframe = win.document.createElement('iframe')
+        iframe.style.width = "100%"
+        iframe.style.height = "100%"
+        iframe.style.border = "none"
+        iframe.src = url
+        win.document.body.appendChild(iframe)
+      }
+    </script>
+    </nav>
+
+    	<h1>Change Favicon and Title</h1>
+	<form>
+		<label for="faviconInput">Upload Favicon:</label>
+		<input type="file" id="faviconInput" accept=".ico,.png,.jpg,.jpeg,.gif" />
+		<br>
+		<label for="titleInput">Set Title:</label>
+		<input type="text" id="titleInput" placeholder="Enter Title Here" />
+		<br>
+		<input type="submit" value="Save Changes" />
+	</form>
+
+	<script>
+		const faviconInput = document.getElementById("faviconInput");
+		const titleInput = document.getElementById("titleInput");
+		const favicon = document.getElementById("favicon");
+
+		document.querySelector("form").addEventListener("submit", function(e) {
+			e.preventDefault();
+			if (faviconInput.files.length > 0) {
+				const file = faviconInput.files[0];
+				const reader = new FileReader();
+				reader.addEventListener("load", function() {
+					favicon.href = reader.result;
+				});
+				reader.readAsDataURL(file);
+			}
+			if (titleInput.value) {
+				document.title = titleInput.value;
+			}
+		});
+	</script>
+
+
+
+
+
+
+
+    <p style="color:white; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Thanks for buying scholology 2 premium! If you haven't already, please join our discord.</p>
+    <a href="https://discord.gg/AjUA32j9" target="_blank">Our discord server</a>
+
+    <iframe src="https://www.powr.io/comments/i/35569475#page"></iframe>
+  </body>
+</html>
